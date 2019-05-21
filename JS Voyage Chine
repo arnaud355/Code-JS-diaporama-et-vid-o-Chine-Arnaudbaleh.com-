@@ -1,0 +1,131 @@
+$(document).ready(function(){
+	(function(){
+		
+		/*function chargement(){
+			let delai = 0;
+			let delaiMax = 3000;
+			let delaiRef = 300;
+			while(delai < delaiMax){
+				$("#spanChargement").html(delai);
+				 setTimeout(function(){delai = delai + 10;}, 300);
+			}
+		}*/
+		
+		function rotateFunction() {
+			//$("body > *:not(#general)").css("display","none");
+			$(".rotate").animate(
+				{rotation: 360},
+				{
+				  duration: 1000,
+				  step: function(now, fx) {
+					  $(this).css({"transform": "rotate("+now+"deg)"});
+				  }
+				}
+			);
+		}
+		function inverseRotateFunction() {
+			$(".inverseRotate").animate(
+				{rotation: -360},
+				{
+				  duration: 1000,
+				  step: function(now, fx) {
+					  $(this).css({"transform": "rotate("+now+"deg)"});
+				  }
+				}
+			);
+		}
+		function generalFonction() {
+			$("#div3,#div4").fadeOut(1000);
+			$("#div1,#div5").slideUp(1000);
+			$("#div2,#div6").slideUp().slideDown(500,function(){
+				$("#general").css("display","none");
+				//$("*").css("display","block");
+			});
+			
+		}
+		//chargement();
+		rotateFunction();
+		inverseRotateFunction();
+		generalFonction();
+	})();
+
+    $(".navbar a, footer a").on("click", function(event){
+    
+        event.preventDefault();
+        var hash = this.hash;
+        
+        $('body,html').animate({scrollTop: $(hash).offset().top} , 900 , function(){window.location.hash = hash;})
+        
+    });
+	
+})
+		//Diaporama Photo Chine
+			function openModal() {
+		  document.getElementById('myModal').style.display = "block";
+		}
+
+		function closeModal() {
+		  document.getElementById('myModal').style.display = "none";
+		}
+
+		var slideIndex = 1;
+		showSlides(slideIndex);
+
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+		  var i;
+		  var slides = document.getElementsByClassName("mySlides");
+		  var dots = document.getElementsByClassName("demo");
+		  var captionText = document.getElementById("caption");
+		  if (n > slides.length) {slideIndex = 1}
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+			  slides[i].style.display = "none";
+		  }
+		  for (i = 0; i < dots.length; i++) {
+			  dots[i].className = dots[i].className.replace(" active", "");
+		  }
+		  slides[slideIndex-1].style.display = "block";
+		  dots[slideIndex-1].className += " active";
+		  captionText.innerHTML = dots[slideIndex-1].alt;
+		}
+		
+		//Diaporama VidÃ©o Chine
+		let spanLecteur = document.querySelectorAll('.spanLecteur');
+		let divVideos = document.querySelectorAll('.divVideo');
+		let listeLi = document.querySelectorAll('.liste');
+		let liTemp;
+		let taillespanLecteur = spanLecteur.length;
+		let tailledivVideos = divVideos.length;
+		let parent = document.getElementById('uli');
+		
+		for(let i = 0;i < taillespanLecteur;i++){
+			spanLecteur[i].addEventListener('click',function(){
+		//au click sur la li ont veut que Ã§a soit la vidÃ©o cliquÃ© qui s'affiche dans la div video
+		//On fait d'abord une boucle pour effacer l'une des videos en cours dans la div video
+				for(let j = 0;j < tailledivVideos;j++){
+					/*if(liOld){
+						if(liOld.className === "paslectureEnCours"){
+							document.getElementById('uli').appendChild(liOld);
+							liOld.className === "lectureEnCours";
+						}
+					}*/
+						divVideos[j].setAttribute("class", "paslectureEnCours");
+						listeLi[j].setAttribute("class", "lectureEnCours");
+				}
+				divVideos[i].setAttribute("class", "lectureEnCours");
+				listeLi[i].setAttribute("class", "paslectureEnCours");
+				//let liOld = parent.removeChild(listeLi[i]);
+				
+				
+			},false);
+		}
+		
+		
